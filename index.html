@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Institute of Digital Risk — Industry-led training and deployment institute for digital, cyber and AI risk practitioners." />
+  <title>Institute of Digital Risk (IDR)</title>
+
+  <!-- Google Fonts — as permitted by spec -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       DESIGN NOTE (for submission):
+       The cube icon is inspired by an isometric structure to convey
+       stability, multi-dimensional thinking and resilience — core traits
+       of risk management. Orange signals urgency and energy; black and
+       dark grey communicate authority and precision. Bebas Neue was chosen
+       for display headings for its condensed, technical authority, paired
+       with Outfit for readable body copy and JetBrains Mono for labels.
+       The icon-only variant is legible as small as 16×16px (favicon), and
+       the full lockup works across presentations, email headers and web.
+    ══════════════════════════════════════════ */
+
+    /* ─── CSS Reset ─────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Design Tokens ─────────────────────────── */
+    :root {
+      --orange:        #FF6B1A;
+      --orange-hover:  #FF8C42;
+      --orange-dim:    #CC510E;
+      --orange-glow:   rgba(255, 107, 26, 0.15);
+      --orange-glass:  rgba(255, 107, 26, 0.08);
+      --black:         #080809;
+      --surface:       #0F0F12;
+      --surface-2:     #161618;
+      --surface-3:     #1D1D21;
+      --border:        rgba(255, 255, 255, 0.07);
+      --border-or:     rgba(255, 107, 26, 0.35);
+      --text:          #DDDDE8;
+      --text-muted:    #66667A;
+      --text-dim:      #35353F;
+      --white:         #FFFFFF;
+      --font-display:  'Bebas Neue', 'Arial Narrow', sans-serif;
+      --font-body:     'Outfit', sans-serif;
+      --font-mono:     'JetBrains Mono', 'Courier New', monospace;
+      --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-h:         68px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--orange);
+      color: #000;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+
+    img, svg { display: block; max-width: 100%; }
+
+    /* ══════════════════════════════════════════
+       HEADER + NAV  (semantic: <header><nav>)
+    ══════════════════════════════════════════ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      height: var(--nav-h);
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    header.scrolled {
+      background: rgba(8, 8, 9, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+    }
+
+    nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(16px, 4vw, 64px);
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(255,107,26,0.35));
+      transition: filter 0.3s;
+    }
+
+    .logo:hover .logo-icon {
+      filter: drop-shadow(0 0 12px rgba(255,107,26,0.6));
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-acronym {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--orange);
+      letter-spacing: 5px;
+      line-height: 1;
+    }
+
+    .logo-name {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      letter-spacing: 2.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.3s var(--ease);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Nav CTA */
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #000;
+      background: var(--orange);
+      padding: 10px 22px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.18);
+      transform: translateX(-110%) skewX(-18deg);
+      transition: transform 0.45s ease;
+    }
+
+    .nav-cta:hover { background: var(--orange-hover); transform: translateY(-1px); }
+    .nav-cta:hover::before { transform: translateX(110%) skewX(-18deg); }
+
+    /* Hamburger (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      background: rgba(8,8,9,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 850;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+    }
+
+    .mobile-drawer.open { display: flex; }
+
+    .mobile-drawer a {
+      font-family: var(--font-display);
+      font-size: 52px;
+      letter-spacing: 4px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-drawer a:hover { color: var(--orange); }
+
+    /* ══════════════════════════════════════════
+       MAIN (wraps all sections per spec)
+    ══════════════════════════════════════════ */
+    main { display: block; }
+
+    /* Shared section spacing */
+    section {
+      padding: clamp(72px, 10vw, 130px) clamp(16px, 5vw, 72px);
+    }
+
+    /* Shared labels */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 4px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .tag::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* Shared headings */
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.5vw, 76px);
+      text-transform: uppercase;
+      line-height: 0.92;
+      letter-spacing: 0.5px;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .section-heading .accent { color: var(--orange); }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ══════════════════════════════════════════
+       1. HERO SECTION
+    ══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      padding-top: calc(var(--nav-h) + clamp(40px, 6vw, 80px));
+      padding-bottom: clamp(60px, 8vw, 100px);
+      padding-left:  clamp(16px, 5vw, 72px);
+      padding-right: clamp(16px, 5vw, 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background: dot grid */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 60% 50%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Orange glow blob */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -10%; right: 0;
+      width: 60vw; height: 70vh;
+      background: radial-gradient(ellipse at top right, rgba(255,107,26,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+    }
+
+    .hero-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.15s forwards;
+    }
+
+    .hero-label-dot {
+      width: 6px; height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* Spec: Headline that reflects IDR's mission */
+    h1.hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: 0.9;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.85s 0.3s forwards;
+    }
+
+    h1.hero-heading .accent { color: var(--orange); }
+
+    /* Spec: Subheading explaining what IDR does */
+    .hero-sub {
+      font-size: clamp(14px, 1.5vw, 17px);
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 470px;
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.75s 0.48s forwards;
+    }
+
+    /* Spec: CTA button */
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s 0.62s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #000;
+      background: var(--orange);
+      padding: 15px 34px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      font-weight: 600;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.18);
+      transform: translateX(-110%) skewX(-18deg);
+      transition: transform 0.45s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(255,107,26,0.3);
+    }
+
+    .btn-primary:hover::before { transform: translateX(110%) skewX(-18deg); }
+
+    .btn-arrow { transition: transform 0.3s; }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 15px 34px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      box-shadow: inset 0 0 0 1px var(--orange), 0 0 20px var(--orange-glass);
+      transform: translateY(-2px);
+    }
+
+    /* Hero right: 3-D CSS cube */
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .cube-scene {
+      width: 220px; height: 220px;
+      perspective: 650px;
+      position: relative;
+    }
+
+    .cube-3d {
+      width: 130px; height: 130px;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform-style: preserve-3d;
+      animation: rotateCube 18s linear infinite;
+    }
+
+    @keyframes rotateCube {
+      from { transform: translate(-50%,-50%) rotateX(-22deg) rotateY(0deg); }
+      to   { transform: translate(-50%,-50%) rotateX(-22deg) rotateY(360deg); }
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 130px; height: 130px;
+      border: 1px solid rgba(255,107,26,0.3);
+    }
+
+    .cube-face.front  { transform: translateZ(65px);            background: rgba(255,107,26,0.07); }
+    .cube-face.back   { transform: rotateY(180deg) translateZ(65px); background: rgba(255,107,26,0.03); }
+    .cube-face.left   { transform: rotateY(-90deg) translateZ(65px); background: rgba(255,107,26,0.05); }
+    .cube-face.right  { transform: rotateY(90deg)  translateZ(65px); background: rgba(255,107,26,0.05); }
+    .cube-face.top    { transform: rotateX(90deg)  translateZ(65px); background: rgba(255,107,26,0.13); }
+    .cube-face.bottom { transform: rotateX(-90deg) translateZ(65px); background: rgba(255,107,26,0.02); }
+
+    .orbit-ring {
+      position: absolute;
+      inset: -32px;
+      border: 1px dashed rgba(255,107,26,0.14);
+      border-radius: 50%;
+      animation: rotateCube 22s linear infinite reverse;
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: flex;
+      gap: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 42px;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Scroll cue */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.2s forwards;
+    }
+
+    .scroll-hint span {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .scroll-bar {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100%{ opacity:0.3; transform: scaleY(0.5); transform-origin: top; }
+      50%     { opacity:1;   transform: scaleY(1);   transform-origin: top; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════════════════
+       TICKER (between hero and about)
+    ══════════════════════════════════════════ */
+    .ticker-strip {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 13px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      animation: ticker 30s linear infinite;
+    }
+
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 0 32px;
+      color: var(--text-muted);
+    }
+
+    .ticker-item.hi { color: var(--orange); }
+
+    /* ══════════════════════════════════════════
+       2. ABOUT IDR SECTION
+    ══════════════════════════════════════════ */
+    #about {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    /* Spec: 1-2 short paragraphs, UK partnership */
+    .about-body p {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .about-body p strong { color: var(--text); font-weight: 500; }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* University badge */
+    .uni-card {
+      margin-top: 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      padding: 20px 22px;
+    }
+
+    .uni-icon {
+      width: 42px; height: 42px;
+      flex-shrink: 0;
+      border: 1px solid var(--border-or);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .uni-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .uni-value {
+      font-size: 13.5px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* About right: stats */
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--orange-glass);
+      transform: translateX(-100%);
+      transition: transform 0.45s ease;
+    }
+
+    .stat-card:hover { border-color: var(--border-or); transform: translateX(6px); }
+    .stat-card:hover::before { transform: translateX(0); }
+
+    .stat-card-num {
+      font-family: var(--font-display);
+      font-size: 50px;
+      color: var(--orange);
+      line-height: 1;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+
+    .stat-card-info { position: relative; z-index: 1; }
+
+    .stat-card-title {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 3px;
+    }
+
+    .stat-card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════════
+       3. SERVICE PILLARS / MODEL
+    ══════════════════════════════════════════ */
+    #services { background: var(--black); }
+
+    .services-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .services-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Spec: at least 3 cards / blocks */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 72px;
+    }
+
+    .pillar {
+      background: var(--surface);
+      padding: clamp(28px, 3vw, 48px) clamp(20px, 2.5vw, 40px);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s var(--ease);
+    }
+
+    .pillar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-hover));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .pillar:hover { background: var(--surface-2); }
+    .pillar:hover::after { transform: scaleX(1); }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: var(--orange);
+      opacity: 0.6;
+      margin-bottom: 28px;
+    }
+
+    .pillar-icon {
+      width: 50px; height: 50px;
+      border: 1px solid var(--border-or);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .pillar:hover .pillar-icon {
+      background: var(--orange-glass);
+      box-shadow: 0 0 18px var(--orange-glow);
+    }
+
+    .pillar-icon svg { width: 24px; height: 24px; }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 27px;
+      text-transform: uppercase;
+      color: var(--white);
+      letter-spacing: 1px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .pillar-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .pillar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid var(--border-or);
+      padding: 5px 11px;
+      transition: background 0.25s;
+    }
+
+    .chip:hover { background: var(--orange-glass); }
+
+    /* Spec: "train – hire – innovate – deploy" pipeline */
+    .pipeline {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: clamp(28px, 4vw, 56px);
+    }
+
+    .pipeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .pipeline-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .pipeline-rule {
+      flex: 1;
+      margin-left: 20px;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+    }
+
+    /* Connector line between nodes */
+    .pipeline-steps::before {
+      content: '';
+      position: absolute;
+      top: 26px;
+      left: calc(12.5% + 2px);
+      right: calc(12.5% + 2px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--orange), rgba(255,107,26,0.2));
+      z-index: 0;
+    }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-node {
+      width: 52px; height: 52px;
+      border: 1.5px solid var(--orange);
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .step-node:hover {
+      background: var(--orange-glass);
+      box-shadow: 0 0 20px var(--orange-glow);
+    }
+
+    .step-node-num {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--orange);
+    }
+
+    .step-name {
+      font-family: var(--font-display);
+      font-size: 19px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 130px;
+    }
+
+    /* ══════════════════════════════════════════
+       4. COMMUNITY / WHO WE SERVE
+    ══════════════════════════════════════════ */
+    #community {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(40px, 6vw, 96px);
+    }
+
+    /* Spec: students, early-career, practitioners in fin services / critical infra */
+    .community-copy p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-top: 20px;
+    }
+
+    .sector-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .sector-pill {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+
+    .sector-pill:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: var(--orange-glass);
+    }
+
+    .audience-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .aud-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .aud-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .aud-card:hover {
+      border-color: var(--border-or);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+    }
+
+    .aud-card:hover::before { transform: scaleX(1); }
+
+    .aud-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .aud-card:hover .aud-icon { border-color: var(--border-or); }
+
+    .aud-title {
+      font-family: var(--font-display);
+      font-size: 21px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 9px;
+    }
+
+    .aud-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════════════════
+       5. CONTACT / CALL TO ACTION
+    ══════════════════════════════════════════ */
+    #contact {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .contact-copy p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 20px;
+      margin-bottom: 36px;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      transition: opacity 0.25s;
+    }
+
+    .contact-link:hover { opacity: 0.7; }
+
+    .ci-icon {
+      width: 38px; height: 38px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s;
+    }
+
+    .contact-link:hover .ci-icon { border-color: var(--border-or); }
+
+    .ci-icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--orange); fill: none; stroke-width: 1.5;
+    }
+
+    .ci-label {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .ci-value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--orange);
+    }
+
+    /* Spec: Simple contact form — name, email, message */
+    form.contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+    .form-field { display: flex; flex-direction: column; }
+
+    .form-field label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 13px 16px 7px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      transition: color 0.25s;
+    }
+
+    .form-field:focus-within label { color: var(--orange); }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 11px 16px 14px;
+      outline: none;
+      resize: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--orange);
+      box-shadow: inset 0 0 0 1px var(--orange);
+    }
+
+    /* First row — right border removed for seamless join */
+    .form-row .form-field:first-child input,
+    .form-row .form-field:first-child label { border-right: none; }
+
+    /* Message field: top border removed (label provides it) */
+    .form-field.full label { border-top: 1px solid var(--border); }
+    .form-field.full textarea { border-top: none; min-height: 128px; }
+
+    .form-submit {
+      background: var(--orange);
+      color: #000;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 18px 28px;
+      cursor: pointer;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .form-submit::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.16);
+      transform: translateX(-110%) skewX(-18deg);
+      transition: transform 0.45s ease;
+    }
+
+    .form-submit:hover { background: var(--orange-hover); }
+    .form-submit:hover::before { transform: translateX(110%) skewX(-18deg); }
+
+    .form-arrow { font-size: 18px; transition: transform 0.3s; }
+    .form-submit:hover .form-arrow { transform: translateX(5px); }
+
+    #form-success {
+      display: none;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      padding: 15px 18px;
+      border: 1px solid var(--border-or);
+      background: var(--orange-glass);
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER  (semantic: <footer>)
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: clamp(24px, 3vw, 40px) clamp(16px, 5vw, 72px);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .footer-links a:hover { color: var(--orange); }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE  (CSS Grid / Flexbox only — no framework)
+    ══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .pillars-grid      { grid-template-columns: 1fr 1fr; }
+      .pipeline-steps    { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+      .pipeline-steps::before { display: none; }
+      .community-grid    { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger           { display: flex; }
+
+      #hero                { grid-template-columns: 1fr; min-height: auto; padding-bottom: 80px; }
+      .hero-visual         { display: none; }
+      .scroll-hint         { display: none; }
+
+      .about-grid          { grid-template-columns: 1fr; }
+      .services-top        { grid-template-columns: 1fr; gap: 28px; }
+      .pillars-grid        { grid-template-columns: 1fr; }
+      .pipeline-steps      { grid-template-columns: 1fr 1fr; }
+      .contact-grid        { grid-template-columns: 1fr; }
+      .audience-cards      { grid-template-columns: 1fr; }
+      .form-row            { grid-template-columns: 1fr; }
+
+      /* Fix first-row borders on mobile */
+      .form-row .form-field:first-child input,
+      .form-row .form-field:first-child label { border-right: 1px solid var(--border); }
+
+      .footer-inner        { flex-direction: column; align-items: flex-start; }
+      .footer-links        { gap: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-stats          { gap: 24px; }
+      .pipeline-steps      { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════
+     SEMANTIC: <header> contains <nav>
+══════════════════════════════════════════ -->
+<header id="site-header">
+  <nav aria-label="Primary navigation">
+
+    <!-- Logo: icon + text -->
+    <a class="logo" href="#hero" aria-label="Institute of Digital Risk — Home">
+      <!-- Inline SVG cube logo -->
+      <svg class="logo-icon" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="navTop" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF6B1A"/>
+            <stop offset="100%" stop-color="#E05A0C"/>
+          </linearGradient>
+        </defs>
+        <polygon points="23,3 43,14.5 23,26 3,14.5" fill="url(#navTop)"/>
+        <polygon points="23,26 3,14.5 3,31.5 23,43" fill="#1C1C1C" stroke="#252525" stroke-width="0.7"/>
+        <polygon points="23,26 43,14.5 43,31.5 23,43" fill="#444444" stroke="#252525" stroke-width="0.7"/>
+        <line x1="23" y1="3" x2="23" y2="26" stroke="#FF8C42" stroke-width="0.8" opacity="0.45"/>
+        <circle cx="23" cy="3" r="1.8" fill="#FF8C42"/>
+      </svg>
+
+      <div class="logo-text">
+        <span class="logo-acronym">IDR</span>
+        <span class="logo-name">Institute of Digital Risk</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav links -->
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Spec: CTA button -->
+    <a class="nav-cta" href="#contact">Register Interest</a>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </nav>
+</header>
+
+<!-- Mobile navigation drawer -->
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <a href="#about"     class="mob-link">About</a>
+  <a href="#services"  class="mob-link">Services</a>
+  <a href="#community" class="mob-link">Community</a>
+  <a href="#contact"   class="mob-link">Contact</a>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     SEMANTIC: <main> wraps all content sections
+══════════════════════════════════════════ -->
+<main id="main-content">
+
+  <!-- ── 1. HERO ─────────────────────────────── -->
+  <section id="hero" aria-labelledby="hero-heading">
+
+    <!-- Animated particle canvas -->
+    <canvas id="particle-canvas" style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.45;" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-label">
+        <div class="hero-label-dot" aria-hidden="true"></div>
+        Industry-Led Digital Risk Institute
+      </div>
+
+      <!-- Spec: Headline that reflects IDR's mission -->
+      <h1 class="hero-heading" id="hero-heading">
+        Advancing<br>
+        The Future<br>
+        Of <span class="accent">Digital</span><br>
+        <span class="accent">Risk</span>
+      </h1>
+
+      <!-- Spec: Subheading — trains and deploys practitioners, academic + industry -->
+      <p class="hero-sub">
+        IDR trains and deploys the next generation of digital risk practitioners — combining rigorous academic collaboration with hands-on industry practice across regulated, high-consequence environments.
+      </p>
+
+      <!-- Spec: Call-to-action buttons -->
+      <div class="hero-btns">
+        <a class="btn-primary" href="#services">
+          Explore Programs <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn-secondary" href="#contact">
+          Hire Talent
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero 3-D visual -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="cube-scene">
+        <div class="orbit-ring"></div>
+        <div class="cube-3d">
+          <div class="cube-face front"></div>
+          <div class="cube-face back"></div>
+          <div class="cube-face left"></div>
+          <div class="cube-face right"></div>
+          <div class="cube-face top"></div>
+          <div class="cube-face bottom"></div>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num" data-target="500">0+</div>
+          <div class="stat-label">Practitioners Trained</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-target="12">0+</div>
+          <div class="stat-label">Industry Sectors</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-target="3">0+</div>
+          <div class="stat-label">UK University Partners</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- Ticker band -->
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item hi">Digital Risk</span><span class="ticker-item">·</span>
+      <span class="ticker-item">AI Governance</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Cyber Resilience</span><span class="ticker-item">·</span>
+      <span class="ticker-item">NIST CSF</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">ISO 27001</span><span class="ticker-item">·</span>
+      <span class="ticker-item">NIS2 Compliance</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Technology Risk</span><span class="ticker-item">·</span>
+      <span class="ticker-item">DORA</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Academic Partnership</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Financial Services</span><span class="ticker-item">·</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item hi">Digital Risk</span><span class="ticker-item">·</span>
+      <span class="ticker-item">AI Governance</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Cyber Resilience</span><span class="ticker-item">·</span>
+      <span class="ticker-item">NIST CSF</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">ISO 27001</span><span class="ticker-item">·</span>
+      <span class="ticker-item">NIS2 Compliance</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Technology Risk</span><span class="ticker-item">·</span>
+      <span class="ticker-item">DORA</span><span class="ticker-item">·</span>
+      <span class="ticker-item hi">Academic Partnership</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Financial Services</span><span class="ticker-item">·</span>
+    </div>
+  </div>
+
+  <!-- ── 2. ABOUT IDR ──────────────────────── -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <div class="tag">Who We Are</div>
+        <h2 class="section-heading" id="about-heading">
+          Built by<br>Industry.<br>Driven by<br><span class="accent">Purpose.</span>
+        </h2>
+
+        <!-- Spec: UK university partnership badge -->
+        <div class="uni-card">
+          <div class="uni-icon" aria-hidden="true">🎓</div>
+          <div>
+            <div class="uni-label">UK University Partnership Model</div>
+            <div class="uni-value">Rigorous academic insight meets real-world deployment</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal delay-1">
+        <!-- Spec: 1-2 short paragraphs, industry-led, UK partnership, real-world projects -->
+        <div class="about-body">
+          <p>
+            The Institute of Digital Risk is an <strong>industry-led training and deployment institute</strong> purpose-built for digital, cyber and technology risk roles across regulated and high-consequence sectors. We exist to close the widening gap between academic knowledge and the practical skills demanded by today's risk landscape.
+          </p>
+          <p>
+            Through our unique <strong>UK university partnership model</strong>, IDR combines rigorous academic insight with live, real-world projects sourced directly from industry. Our graduates don't just learn frameworks — they apply them under real operational pressure, emerging as deployment-ready professionals from day one.
+          </p>
+        </div>
+
+        <!-- Stats / metrics -->
+        <div class="about-stats" style="margin-top:28px">
+          <div class="stat-card reveal delay-1">
+            <div class="stat-card-num">100%</div>
+            <div class="stat-card-info">
+              <div class="stat-card-title">Industry-Led Curriculum</div>
+              <div class="stat-card-desc">Every programme co-designed with regulated sector employers</div>
+            </div>
+          </div>
+          <div class="stat-card reveal delay-2">
+            <div class="stat-card-num">Day 1</div>
+            <div class="stat-card-info">
+              <div class="stat-card-title">Deployment Ready</div>
+              <div class="stat-card-desc">Practitioners hit the ground running from their first day in role</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. SERVICE PILLARS ────────────────── -->
+  <section id="services" aria-labelledby="services-heading">
+
+    <div class="services-top">
+      <div class="reveal">
+        <div class="tag">Our Model</div>
+        <h2 class="section-heading" id="services-heading">
+          Three<br>Pillars.<br>One <span class="accent">Mission.</span>
+        </h2>
+      </div>
+      <p class="services-intro reveal delay-1">
+        IDR's integrated model spans training, innovation and advisory services — a self-reinforcing ecosystem that continuously advances the field of digital and AI risk. Each pillar feeds the next, creating practitioners and frameworks that shape the industry rather than merely respond to it.
+      </p>
+    </div>
+
+    <!-- Spec: At least 3 cards — Academy / Innovation & Incubation / Advisory Services -->
+    <div class="pillars-grid">
+
+      <!-- Pillar 1: Academy -->
+      <article class="pillar reveal">
+        <div class="pillar-num">01 / 03</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.4" stroke-linecap="round">
+            <rect x="2" y="3" width="20" height="14" rx="1"/>
+            <line x1="2" y1="8" x2="22" y2="8"/>
+            <circle cx="12" cy="14" r="3"/>
+            <line x1="12" y1="11" x2="12" y2="8"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Academy</h3>
+        <p class="pillar-desc">
+          Structured training programmes, bootcamps and professional development pathways for students and mid-career professionals. Grounded in real-world scenarios and co-designed with regulated sector employers for immediate impact.
+        </p>
+        <div class="pillar-tags">
+          <span class="chip">Bootcamps</span>
+          <span class="chip">Certifications</span>
+          <span class="chip">Apprenticeships</span>
+          <span class="chip">CPD Pathways</span>
+        </div>
+      </article>
+
+      <!-- Pillar 2: Innovation & Incubation -->
+      <article class="pillar reveal delay-1">
+        <div class="pillar-num">02 / 03</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.4" stroke-linecap="round">
+            <polygon points="12,2 22,19 2,19"/>
+            <polygon points="12,8 18,19 6,19" opacity="0.35"/>
+            <circle cx="12" cy="15" r="1.8" fill="#FF6B1A" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Innovation &amp; Incubation</h3>
+        <p class="pillar-desc">
+          Developing next-generation IP, risk models and AI governance frameworks in partnership with academia and industry. A living lab for ideas that shape the future of digital risk — from emerging threat intelligence to responsible AI deployment.
+        </p>
+        <div class="pillar-tags">
+          <span class="chip">AI Governance</span>
+          <span class="chip">Research IP</span>
+          <span class="chip">Risk Modelling</span>
+          <span class="chip">Incubation</span>
+        </div>
+      </article>
+
+      <!-- Pillar 3: Advisory Services -->
+      <article class="pillar reveal delay-2">
+        <div class="pillar-num">03 / 03</div>
+        <div class="pillar-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.4" stroke-linecap="round">
+            <rect x="2" y="2" width="9" height="9"/>
+            <rect x="13" y="2" width="9" height="9" opacity="0.4"/>
+            <rect x="2" y="13" width="9" height="9" opacity="0.4"/>
+            <rect x="13" y="13" width="9" height="9"/>
+            <line x1="11" y1="6.5" x2="13" y2="6.5"/>
+            <line x1="11" y1="17.5" x2="13" y2="17.5"/>
+            <line x1="6.5" y1="11" x2="6.5" y2="13"/>
+            <line x1="17.5" y1="11" x2="17.5" y2="13"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">Advisory Services</h3>
+        <p class="pillar-desc">
+          Expert guidance helping organisations implement and mature risk frameworks. We translate complex policy into operational practice, reducing compliance burden across NIST, ISO 27001, NIS2, DORA and the EU AI Act.
+        </p>
+        <div class="pillar-tags">
+          <span class="chip">NIST CSF</span>
+          <span class="chip">ISO 27001</span>
+          <span class="chip">NIS2</span>
+          <span class="chip">DORA</span>
+          <span class="chip">AI Act</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Spec: "train – hire – innovate – deploy" pipeline (optional but included) -->
+    <div class="pipeline reveal">
+      <div class="pipeline-header">
+        <span class="pipeline-label">The IDR Pipeline — Train · Hire · Innovate · Deploy</span>
+        <div class="pipeline-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <div class="step-node"><span class="step-node-num">01</span></div>
+          <div class="step-name">Train</div>
+          <div class="step-desc">Bootcamps, accredited programmes &amp; structured learning pathways</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-node"><span class="step-node-num">02</span></div>
+          <div class="step-name">Hire</div>
+          <div class="step-desc">Deployment-ready practitioners matched to regulated sector roles</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-node"><span class="step-node-num">03</span></div>
+          <div class="step-name">Innovate</div>
+          <div class="step-desc">Real-world project incubation generating new IP and risk frameworks</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-node"><span class="step-node-num">04</span></div>
+          <div class="step-name">Deploy</div>
+          <div class="step-desc">Embedded advisory support scaling your risk maturity at pace</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. COMMUNITY / WHO WE SERVE ─────── -->
+  <section id="community" aria-labelledby="community-heading">
+    <div class="community-grid">
+
+      <div class="reveal">
+        <div class="tag">Who We Serve</div>
+        <h2 class="section-heading" id="community-heading">
+          A Community<br>Built on<br><span class="accent">Risk Expertise</span>
+        </h2>
+
+        <!-- Spec: students, early-career, practitioners in financial services / critical infra -->
+        <div class="community-copy">
+          <p>
+            IDR brings together students, early-career professionals and experienced practitioners united by a commitment to mastering digital and cyber risk. Whether you're entering the industry or deepening your specialisation, IDR provides the programmes, network and real-world exposure you need.
+          </p>
+          <p>
+            Our community spans the sectors where digital risk matters most — financial services, critical infrastructure, healthcare, government and beyond. We serve professionals who need more than a qualification: they need deployment-ready competency.
+          </p>
+        </div>
+
+        <div class="sector-cloud">
+          <span class="sector-pill">Financial Services</span>
+          <span class="sector-pill">Critical Infrastructure</span>
+          <span class="sector-pill">Healthcare</span>
+          <span class="sector-pill">Government &amp; Defence</span>
+          <span class="sector-pill">Insurance</span>
+          <span class="sector-pill">Energy &amp; Utilities</span>
+          <span class="sector-pill">Legal &amp; Professional</span>
+          <span class="sector-pill">FinTech</span>
+        </div>
+      </div>
+
+      <div class="audience-cards reveal delay-1">
+        <article class="aud-card">
+          <div class="aud-icon" aria-hidden="true">🎓</div>
+          <h3 class="aud-title">Students</h3>
+          <p class="aud-desc">Undergraduate and postgraduate students seeking a direct route into digital risk careers through structured, industry-aligned programmes.</p>
+        </article>
+        <article class="aud-card">
+          <div class="aud-icon" aria-hidden="true">🚀</div>
+          <h3 class="aud-title">Early-Career</h3>
+          <p class="aud-desc">Junior professionals building specialist risk credentials and getting deployed into high-consequence environments with confidence.</p>
+        </article>
+        <article class="aud-card">
+          <div class="aud-icon" aria-hidden="true">⚙️</div>
+          <h3 class="aud-title">Practitioners</h3>
+          <p class="aud-desc">Experienced risk and cyber professionals upskilling in AI governance, emerging threats and evolving regulatory frameworks.</p>
+        </article>
+        <article class="aud-card">
+          <div class="aud-icon" aria-hidden="true">🏢</div>
+          <h3 class="aud-title">Organisations</h3>
+          <p class="aud-desc">Regulated sector employers seeking pre-vetted, deployment-ready digital risk talent and advisory support for risk framework implementation.</p>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 5. CONTACT / CALL TO ACTION ───────── -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="contact-grid">
+
+      <div class="reveal">
+        <div class="tag">Get In Touch</div>
+        <h2 class="section-heading" id="contact-heading">
+          Ready to<br>Build the<br>Future of <span class="accent">Risk?</span>
+        </h2>
+        <div class="contact-copy">
+          <p>
+            Whether you're looking to enrol in a programme, hire trained talent or explore an advisory partnership — we'd love to hear from you. Register your interest and our team will be in touch within one business day.
+          </p>
+        </div>
+
+        <!-- Spec: placeholder email / button -->
+        <div class="contact-info">
+          <a class="contact-link" href="mailto:hello@instituteofdigitalrisk.com">
+            <div class="ci-icon">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="1" y="3" width="14" height="10" rx="1"/>
+                <path d="M1 4l7 5 7-5"/>
+              </svg>
+            </div>
+            <div>
+              <span class="ci-label">Email</span>
+              <span class="ci-value">hello@instituteofdigitalrisk.com</span>
+            </div>
+          </a>
+          <a class="contact-link" href="tel:+441234567890">
+            <div class="ci-icon">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 2h3l1.5 3.5L6 7a9 9 0 003 3l1.5-1.5L14 10v3a1 1 0 01-1 1A11 11 0 012 3a1 1 0 011-1z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="ci-label">Phone</span>
+              <span class="ci-value">+44 (0)12 3456 7890</span>
+            </div>
+          </a>
+          <a class="contact-link" href="#">
+            <div class="ci-icon">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <circle cx="8" cy="7" r="2.5"/>
+                <path d="M8 1a6 6 0 016 6c0 4-6 9-6 9S2 11 2 7a6 6 0 016-6z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="ci-label">Location</span>
+              <span class="ci-value">London, United Kingdom</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spec: Simple contact form — name, email, message -->
+      <div class="reveal delay-1">
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="f-name">Full Name</label>
+              <input type="text" id="f-name" name="name" placeholder="Jane Smith" required autocomplete="name"/>
+            </div>
+            <div class="form-field">
+              <label for="f-email">Email Address</label>
+              <input type="email" id="f-email" name="email" placeholder="jane@company.com" required autocomplete="email"/>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="f-interest" style="border-top:1px solid var(--border);border-bottom:none">Area of Interest</label>
+            <select id="f-interest" name="interest" style="background:var(--surface-2);border:1px solid var(--border);color:var(--text);font-family:var(--font-body);font-size:14px;padding:11px 16px 14px;outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color 0.25s,box-shadow 0.25s">
+              <option value="">Select one…</option>
+              <option>Academy — Join a programme</option>
+              <option>Hire — Recruit trained talent</option>
+              <option>Advisory — Framework implementation</option>
+              <option>Innovation — Research partnership</option>
+              <option>General enquiry</option>
+            </select>
+          </div>
+
+          <!-- Spec: message field -->
+          <div class="form-field full">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" placeholder="Tell us how we can help — whether you're looking to enrol, hire talent, or explore a partnership…" required></textarea>
+          </div>
+
+          <!-- Spec: submit button -->
+          <button type="submit" class="form-submit">
+            Send Message
+            <span class="form-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div id="form-success" role="status" aria-live="polite">
+          ✓ Message received — we'll be in touch within 1 business day.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main><!-- /main -->
+
+<!-- ══════════════════════════════════════════
+     SEMANTIC: <footer>
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">
+      © 2025 Institute of Digital Risk Ltd · All rights reserved
+    </p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#community">Community</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     VANILLA JS ONLY (no framework — per spec)
+══════════════════════════════════════════ -->
+<script>
+  'use strict';
+
+  /* ── Sticky header ─────────────────────── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  /* ── Hamburger / mobile drawer ─────────── */
+  const ham   = document.getElementById('hamburger');
+  const drawer = document.getElementById('mobile-drawer');
+
+  ham.addEventListener('click', () => {
+    const open = ham.getAttribute('aria-expanded') === 'true';
+    ham.setAttribute('aria-expanded', String(!open));
+    drawer.classList.toggle('open', !open);
+  });
+
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      ham.setAttribute('aria-expanded', 'false');
+      drawer.classList.remove('open');
+    });
+  });
+
+  /* ── Scroll reveal (IntersectionObserver) ── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Particle canvas ───────────────────── */
+  (function () {
+    const canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, pts = [];
+    const N = 55, DIST = 115;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    class Pt {
+      constructor() { this.reset(); }
+      reset() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.r  = Math.random() * 1.4 + 0.4;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > W) this.vx *= -1;
+        if (this.y < 0 || this.y > H) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,107,26,0.55)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < N; i++) pts.push(new Pt());
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < N; i++) {
+        for (let j = i + 1; j < N; j++) {
+          const dx = pts[i].x - pts[j].x;
+          const dy = pts[i].y - pts[j].y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < DIST) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = `rgba(255,107,26,${(1 - d / DIST) * 0.16})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+
+  /* ── Counter animation ─────────────────── */
+  function countUp(el, target, duration) {
+    let start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor(progress * target) + '+';
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + '+';
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const t = parseInt(e.target.dataset.target, 10);
+        countUp(e.target, t, 1600);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
+
+  /* ── Contact form submit ───────────────── */
+  const form    = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      form.style.display  = 'none';
+      success.style.display = 'block';
+    }, 900);
+  });
+</script>
+
+</body>
+</html>
